@@ -12,11 +12,10 @@ def reduce_dom(html):
 
   soup = BeautifulSoup(html, "html.parser")
 
-
-  for element in soup.findAll(["meta"]):
+  for element in soup.findAll(text=lambda text: isinstance(text, Comment)):
     element.extract()
 
-  for element in soup.findAll(text=lambda text: isinstance(text, Comment)):
+  for element in soup.findAll(["meta"]):
     element.extract()
 
   for element in soup.findAll():
